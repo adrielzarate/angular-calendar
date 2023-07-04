@@ -1,0 +1,21 @@
+<mat-form-field>
+    <input 
+        type="text" 
+        placeholder="City" 
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+    >
+     <mat-autocomplete 
+        #auto="matAutocomplete" 
+        [displayWith]="displayFn"
+        (optionSelected)="onSelectCity($event.option.value)"
+    >
+         <mat-option 
+            *ngFor="let option of filteredOptions | async" 
+            [value]="option"
+        >
+            {{option.name}}, {{option.state}}, {{option.country}}
+        </mat-option>
+    </mat-autocomplete>
+ </mat-form-field>

@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Reminder</h1>
+
+<div mat-dialog-content>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <input matInput #reminder [(ngModel)]="reminderData.text" maxLength="30">
+    <mat-hint align="end">{{reminder.value.length}} / 30</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Time</mat-label>
+    <mat-select [(ngModel)]="reminderData.dateTime">
+      <mat-option 
+        *ngFor="let time of times | keyvalue"
+        [value]="time.value"
+      >
+        {{time.key}}h
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <app-city-selector
+    (city)="onCitySelected($event)"
+    [preloadedCity]="reminderData.city"
+  ></app-city-selector>
+  <small *ngIf="reminderData.forecast">Weather info: <strong>{{reminderData.forecast}}</strong></small>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="onSave()" [disabled]='!reminderData.text || !reminderData.city'>Save</button>
+</div>

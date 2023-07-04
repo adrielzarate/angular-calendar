@@ -1,0 +1,23 @@
+<div 
+    class="card" 
+    [ngClass]="{
+        'weekend': dateInfo.isWeekend, 
+        'currentMonth': dateInfo.isCurrentMonth, 
+        'currentDate': dateInfo.isCurrentDate 
+    }"
+    (click)="openAddReminder()"
+>
+    <div class="date">{{dateInfo.date}}</div>
+    <div class="chips-container">
+        <mat-chip-list>
+            <mat-chip
+                *ngFor="let reminder of dateInfo.reminders | keyvalue"
+                (click)="openEditReminder($event, reminder.key, reminder.value)"
+                selected
+                color="warn"
+            >
+                <app-reminder [title]="reminder.value.text"></app-reminder>
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+</div>

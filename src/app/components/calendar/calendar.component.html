@@ -1,0 +1,35 @@
+<mat-toolbar>
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Jobsity challenge</span>
+  <span class="spacer"></span>
+</mat-toolbar>
+
+
+<div class="calendar-container">
+
+  <div class="calendar-header">
+    <button mat-icon-button aria-label="Go to previous month" (click)="goPrevMonth()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <div class="month-name">{{monthName}}, {{year}}</div>
+    <button mat-icon-button aria-label="Go to next month" (click)="goNextMonth()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
+  <mat-grid-list cols="7" rowHeight="50px">
+    <mat-grid-tile *ngFor="let dayName of dayNames">{{dayName}}</mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="7">
+    <mat-grid-tile *ngFor="let dateInfo of datesList">
+      <app-date 
+        [dateInfo]="dateInfo"
+        (updateReminder)="updateEvents($event)"
+      ></app-date>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</div>
